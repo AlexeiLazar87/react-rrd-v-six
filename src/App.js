@@ -1,24 +1,34 @@
 import './App.css';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link
-} from "react-router-dom";
+import {Routes, Route} from "react-router-dom";
+import {Home} from "./pages/Home";
+import Blog from "./pages/Blog";
+import About from "./pages/About";
+import PageNotFound from "./pages/PageNotFound";
+import Layout from "./components/Layout";
+import SinglePage from "./pages/SinglePage";
+import CreateNewPost from "./pages/CreateNewPost";
+import EditPost from "./pages/EditPost";
+
 
 function App() {
 
     return (
-        <Router>
-            <div className="App">
-                <div><Link to={'/'}>Home</Link></div>
-                <div><Link to={'/users'}>Users</Link></div>
+        <div className="App">
+
+            <div>
                 <Routes>
-                    <Route path={'/'} element={<h1>Home</h1>}/>
-                    <Route path={'/users'} element={<h1>Users</h1>}/>
+                    <Route path={'/'} element={<Layout/>}>
+                        <Route index element={<Home/>}/>
+                        <Route path={'posts'} element={<Blog/>}/>
+                        <Route path={'posts/:id'} element={<SinglePage/>}/>
+                        <Route path={'posts/:id/edit'} element={<EditPost/>}/>
+                        <Route path={'posts/new'} element={<CreateNewPost/>}/>
+                        <Route path={'about'} element={<About/>}/>
+                        <Route path={'*'} element={<PageNotFound/>}/>
+                    </Route>
                 </Routes>
             </div>
-        </Router>
+        </div>
     );
 }
 
