@@ -1,8 +1,9 @@
 import {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 
 export default function Blog () {
     const [posts, setPosts] = useState([]);
+
     useEffect(() => {
         fetch('https://jsonplaceholder.typicode.com/posts')
             .then(value => value.json())
@@ -12,6 +13,7 @@ export default function Blog () {
 return (
 <div>
     <h1>Our Blog</h1>
+    <Link to={'/posts/new'}>Add new post</Link>
     {
         posts.map(value => (
             <Link key={value.id} to={`/posts/${value.id}`}>
